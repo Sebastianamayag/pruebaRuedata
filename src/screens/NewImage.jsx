@@ -1,14 +1,16 @@
 import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../components/Button'
 import { ModalPhoto } from '../components/ModalPhoto'
 import { useData } from '../hooks/useData'
+import { FAILURE } from '../store/constants'
 import { uploadImages } from '../store/thunks/imagesThunk'
 
 export const NewImage = () => {
   const {data,onInputChange}=useData();
+  const {message,status}=useSelector(state=>state.image.uploadImage)
   const dispatch=useDispatch();
   const handleImage=(image)=>{
     onInputChange('modal',false)
@@ -48,6 +50,12 @@ export const NewImage = () => {
             }
           }} 
         />
+        {
+          status===FAILURE &&
+          (
+            <Text style={{color:red}}>{message}</Text>
+          )
+        }
     </View>
   )
 }

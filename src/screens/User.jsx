@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { widthPercentageToDP } from 'react-native-responsive-screen'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../components/Button'
@@ -7,12 +7,14 @@ import { TextInputCustom } from '../components/TextInputCustom'
 import { Title } from '../components/Title'
 import { handleUsers } from '../functions/userFunctions'
 import { useData } from '../hooks/useData'
+import { FAILURE } from '../store/constants'
 
 
 export const User = ({route}) => {
   const {data,onInputChange} =useData();
   const dispatch=useDispatch();
   const {status}=useSelector(state=>state.user.createrUser);
+  const {status:statusUpdateUser,message}=useSelector(state=>state.user.updateUser);
   const user = route.params?.user ? route.params.user :undefined;
   return (
     <View style={style.container}>
@@ -43,6 +45,12 @@ export const User = ({route}) => {
           defaultValue={user?user.username:data.username}
       />
       <Button status={status} text={user?'Actualizar':'Crear'} onPress={()=>handleUsers(user,data,dispatch)} />
+      {
+        statusUpdateUser===FAILURE &&
+        (
+          <Text style={{color:red}}>{message}</Text>
+        )
+      }
     </View>
   )
 }

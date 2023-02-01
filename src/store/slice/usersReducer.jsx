@@ -67,7 +67,7 @@ export const usersSlice = createSlice({
     },
     UPDATE_USER_FAILURE: (state,action) => {
       state.updateUser.status=FAILURE;
-      state.updateUser.message='Error al actualizar el usuario, por favor intente más tarde';
+      state.updateUser.message='Error al actualizar el usuario,una vez tenga internet los cambios se veran reflejados.';
       return state;
     }
   },

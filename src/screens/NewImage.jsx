@@ -53,7 +53,7 @@ export const NewImage = () => {
         {
           status===FAILURE &&
           (
-            <Text style={{color:red}}>{message}</Text>
+            <Text style={{color:'red'}}>{message}</Text>
           )
         }
     </View>

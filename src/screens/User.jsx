@@ -48,7 +48,7 @@ export const User = ({route}) => {
       {
         statusUpdateUser===FAILURE &&
         (
-          <Text style={{color:red}}>{message}</Text>
+          <Text style={{color:'red'}}>{message}</Text>
         )
       }
     </View>

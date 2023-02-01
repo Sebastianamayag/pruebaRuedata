@@ -27,8 +27,7 @@ export const uploadImages=(image)=>{
             const newImage={...image,dateModified:new Date()}
             const formData = new FormData();
             formData.append('file', newImage,newImage.fileName)
-            console.log(formData)
-            const data=await apiDB.post('/data/images/',{"file":formData});
+            const {data}=await apiDB.post('/data/images/',{"file":formData});
             if(data){
                 dispatch(UPLOAD_IMAGE_SUCCESS());
                 goBack()
@@ -37,7 +36,6 @@ export const uploadImages=(image)=>{
             }
         } catch (error) {
             dispatch(UPLOAD_IMAGE_FAILURE());
-            // console.log("error",error)
         }
     }
 }
